@@ -1,0 +1,125 @@
+ 
+/* Estilo para o vídeo de fundo */
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Estilo para a música de fundo */
+.background-music {
+    display: none;
+}
+
+/* === Estilos para a Página Principal === */
+
+/* Container do perfil */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Cartão de perfil */
+.profile-card {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Foto de perfil */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 5px solid white;
+}
+
+/* Nome do usuário */
+.username {
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Ícone de desenvolvedor */
+.dev-icon {
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+}
+
+/* Descrição */
+.description {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin-top: 15px;
+    opacity: 0.9;
+}
+
+/* === Estilos para a Página de Pontos Positivos === */
+
+/* Pequeno perfil no canto superior esquerdo */
+.small-profile {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.small-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.small-username {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin-top: 5px;
+}
+
+.small-dev-icon {
+    width: 25px;
+    height: 25px;
+    margin-top: 5px;
+}
+
+/* Pontos positivos no meio da tela */
+.points {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+.points ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.points li {
+    margin: 10px 0;
+}
