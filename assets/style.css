@@ -1,24 +1,65 @@
-/* assets/styles.css */
-
-/* Definir estilo básico para o corpo */
-body, html {
+/* Resetando os estilos padrões */
+* {
     margin: 0;
     padding: 0;
-    height: 100%; /* Garantir que a altura ocupe a tela toda */
-    overflow: hidden; /* Impedir barras de rolagem */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black; /* Cor de fundo preta para combinar com o vídeo */
+    box-sizing: border-box;
 }
 
-/* Estilo para o vídeo */
-video {
-    position: absolute; /* Posiciona o vídeo fora do fluxo normal */
-    top: 0;
-    left: 0;
-    width: 100%; /* Largura 100% da tela */
-    height: 100%; /* Altura 100% da tela */
-    object-fit: cover; /* Faz o vídeo cobrir toda a tela sem distorcer */
-    z-index: -1; /* Coloca o vídeo no fundo da página */
+/* Estilos gerais do corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilos do blog */
+.blog {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+/* Estilo de cada post */
+.post {
+    display: flex;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo da imagem do post */
+.post img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 0 0 8px;
+}
+
+/* Estilo do conteúdo do post */
+.post-content {
+    padding: 15px;
+    flex: 1;
+}
+
+/* Título do post */
+.post-title {
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Descrição do post */
+.post-description {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.post-title:hover,
+.post-description:hover {
+    text-decoration: underline;
 }
