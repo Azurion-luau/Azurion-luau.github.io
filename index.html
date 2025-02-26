@@ -62,13 +62,27 @@
             color: white;
             font-size: 16px;
         }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <h1>Azurion Blog</h1>
     <img src="assets/png/profile.png" alt="Site Icon" width="100" height="100">
+    
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Pesquisar pelo título..." onkeyup="searchPosts()">
+    </div>
+    
     <div class="blog">
-        <!-- Blog Post 1 (invisível) -->
         <div class="post" id="post1" style="display: none;">
             <a href="https://example.com/post1">
                 <img src="https://example.com/thumb1.jpg" alt="Thumbnail Post 1">
@@ -79,19 +93,17 @@
             </div>
         </div>
 
-        <!-- Blog Post 2 (visível) -->
         <div class="post" id="post2">
             <a href="https://www.youtube.com">
                 <img src="https://raw.githubusercontent.com/Azurion-luau/AzurionImg/refs/heads/main/images/roblox.jpg" alt="MultiRoblox">
             </a>
             <div class="post-content">
-                <h2 class="post-title" onclick="window.location.href='https://github.com/Azurion-luau/Azurion-luau.github.io/raw/refs/heads/main/Downloads/Roblox/RobloxPc/MultiRoblox.exe';">Multi Roblox</h2>
-                <p class="post-description" onclick="window.location.href='https://github.com/Azurion-luau/Azurion-luau.github.io/raw/refs/heads/main/Downloads/Roblox/RobloxPc/MultiRoblox.exe';">So um multiroblox faz você abrir mais de um roblox. Clique para baixar.</p>
+                <h2 class="post-title">Multi Roblox</h2>
+                <p class="post-description">So um multiroblox faz você abrir mais de um roblox. Clique para baixar.</p>
             </div>
         </div>
     </div>
     
-    <!-- Anúncio invisível -->
     <div class="ad" onclick="randomAd()"></div>
     
     <script>
@@ -105,6 +117,19 @@
             ];
             const randomSite = ads[Math.floor(Math.random() * ads.length)];
             window.location.href = randomSite;
+        }
+
+        function searchPosts() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let posts = document.querySelectorAll(".post");
+            posts.forEach(post => {
+                let title = post.querySelector(".post-title").innerText.toLowerCase();
+                if (title.includes(input)) {
+                    post.style.display = "flex";
+                } else {
+                    post.style.display = "none";
+                }
+            });
         }
     </script>
 </body>
