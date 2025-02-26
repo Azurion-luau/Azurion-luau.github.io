@@ -1,26 +1,24 @@
 /* assets/styles.css */
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+/* Definir estilo básico para o corpo */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Garantir que a altura ocupe a tela toda */
+    overflow: hidden; /* Impedir barras de rolagem */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    background-color: black; /* Cor de fundo preta para combinar com o vídeo */
 }
 
+/* Estilo para o vídeo */
 video {
-    width: 80%; /* Tamanho do vídeo com base na largura da tela */
-    max-width: 800px; /* Limita a largura máxima do vídeo */
-    border: 5px solid #ccc; /* Borda suave para o vídeo */
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave ao redor do vídeo */
-}
-
-h1 {
-    text-align: center;
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+    position: absolute; /* Posiciona o vídeo fora do fluxo normal */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largura 100% da tela */
+    height: 100%; /* Altura 100% da tela */
+    object-fit: cover; /* Faz o vídeo cobrir toda a tela sem distorcer */
+    z-index: -1; /* Coloca o vídeo no fundo da página */
 }
