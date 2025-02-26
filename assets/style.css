@@ -1,0 +1,26 @@
+/* assets/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+video {
+    width: 80%; /* Tamanho do vídeo com base na largura da tela */
+    max-width: 800px; /* Limita a largura máxima do vídeo */
+    border: 5px solid #ccc; /* Borda suave para o vídeo */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave ao redor do vídeo */
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
