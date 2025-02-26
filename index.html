@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>azurion</title>
+    <title>Blog</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <video autoplay loop controls preload="auto" controlsList="nodownload">
-        <!-- Alterando o formato do vídeo para MPW -->
-        <source src="https://github.com/Azurion-luau/Azurion-luau.github.io/raw/refs/heads/main/assets/video/tuto.mp4" type="video/mp4">
-        Seu navegador não suporta a reprodução de vídeos.
-    </video>
+
+    <div class="blog">
+        <!-- Blog Post 1 (invisível) -->
+        <div class="post" id="post1" style="display: none;">
+            <img src="assets/png1/thumb1.jpg" alt="Thumbnail Post 1">
+            <div class="post-content">
+                <h2 class="post-title">Título do Blog 1</h2>
+                <p class="post-description">Descrição do Blog 1. Este post não será exibido.</p>
+            </div>
+        </div>
+
+        <!-- Blog Post 2 (visível) -->
+        <div class="post" id="post2">
+            <img src="assets/png1/thumb2.jpg" alt="Thumbnail Post 2">
+            <div class="post-content">
+                <h2 class="post-title" onclick="window.location.href='https://www.youtube.com';">Título do Blog 2</h2>
+                <p class="post-description" onclick="window.location.href='https://www.youtube.com';">Descrição do Blog 2. Clique para ver mais.</p>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
