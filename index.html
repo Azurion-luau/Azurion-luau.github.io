@@ -1,1 +1,59 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Site de Coisas Aleatórias</title>
+    <style>
+        body {
+            background-color: #202020;
+            color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #ff69b4;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #666;
+        }
+
+        .message {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Site de Coisas Aleatórias</h1>
+    <button onclick="fazerNada()">Clique Aqui (ou não)</button>
+    <p class="message">Esse botão não faz absolutamente nada. É só estético mesmo.</p>
+
+    <script>
+        function fazerNada() {
+            // Literalmente nada
+            console.log("Parabéns, você clicou e nada aconteceu!");
+        }
+    </script>
+</body>
+</html>
