@@ -1,59 +1,113 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Site de Coisas Aleatórias</title>
+    <meta http-equiv="refresh" content="3; url=https://sites.google.com/view/azurflowware/home">
+    <title>AzurFlowWare</title>
     <style>
         body {
-            background-color: #202020;
-            color: #f0f0f0;
-            font-family: 'Arial', sans-serif;
+            background-color: #121212;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-        }
-
-        h1 {
-            color: #ff69b4;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 15px 30px;
-            background-color: #444;
+            font-family: 'Segoe UI', Arial, sans-serif;
             color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+            flex-direction: column;
         }
-
-        button:hover {
-            background-color: #666;
+        
+        .embed-container {
+            background: linear-gradient(135deg, #1a3a1a, #2d5a2d);
+            border-radius: 12px;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid #4CAF50;
+            text-align: center;
+            margin-bottom: 30px;
         }
-
-        .message {
-            margin-top: 30px;
-            font-size: 1.1rem;
-            color: #999;
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        
+        .description {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .redirect-message {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+        
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0;
+            background-color: #4CAF50;
+            animation: load 3s linear forwards;
+        }
+        
+        @keyframes load {
+            to { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <h1>Site de Coisas Aleatórias</h1>
-    <button onclick="fazerNada()">Clique Aqui (ou não)</button>
-    <p class="message">Esse botão não faz absolutamente nada. É só estético mesmo.</p>
+    <div class="embed-container">
+        <img src="https://cdn.discordapp.com/attachments/1358546260184793260/1371916976435499050/Sem_titulo.png?ex=6824e0c0&is=68238f40&hm=6b18b321a2c264668ae1bdba3d47b2f2354411d48d51a79e8b3bd36d2c6e4524&" alt="AzurFlowWare Logo" class="logo">
+        <div class="title">AzurFlowWare</div>
+        <div class="description">Site oficial do AzurFlowWare</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+    
+    <div class="redirect-message">
+        Redirecionando em 3 segundos... <br>
+        Se você não foi redirecionado automaticamente, <a href="https://sites.google.com/view/azurflowware/home">clique aqui</a>.
+    </div>
 
     <script>
-        function fazerNada() {
-            // Literalmente nada
-            console.log("Parabéns, você clicou e nada aconteceu!");
-        }
+        // Redirecionamento via JavaScript para garantir funcionamento
+        setTimeout(function() {
+            window.location.href = "https://sites.google.com/view/azurflowware/home";
+        }, 3000);
     </script>
 </body>
 </html>
