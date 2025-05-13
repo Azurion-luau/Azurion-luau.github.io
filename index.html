@@ -3,83 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="3; url=https://sites.google.com/view/azurflowware/home">
-    <title>AzurFlowWare</title>
+    <title>AzurFlowWare - Discord Style</title>
     <style>
         body {
-            background-color: #121212;
+            background-color: #36393f;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: white;
+            font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #dcddde;
             flex-direction: column;
         }
         
-        .embed-container {
-            background: linear-gradient(135deg, #1a3a1a, #2d5a2d);
-            border-radius: 12px;
-            padding: 20px;
+        .discord-message {
+            display: flex;
+            padding: 1rem;
             width: 80%;
-            max-width: 500px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            border-left: 5px solid #4CAF50;
-            text-align: center;
-            margin-bottom: 30px;
+            max-width: 520px;
         }
         
-        .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 15px;
+        .avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            border: 3px solid #4CAF50;
-            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+            margin-right: 16px;
+            flex-shrink: 0;
         }
         
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #4CAF50;
+        .message-content {
+            width: 100%;
         }
         
-        .description {
-            font-size: 16px;
-            opacity: 0.9;
-            margin-bottom: 15px;
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .username {
+            font-weight: 500;
+            color: #fff;
+            margin-right: 6px;
+        }
+        
+        .timestamp {
+            font-size: 0.75rem;
+            color: #a3a6aa;
+        }
+        
+        .discord-embed {
+            background-color: #2f3136;
+            border-left: 4px solid #3ba55c;
+            border-radius: 4px;
+            padding: 8px 16px 16px 12px;
+            margin-top: 8px;
+        }
+        
+        .embed-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .embed-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .embed-title {
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .embed-description {
+            font-size: 0.875rem;
+            line-height: 1.4;
         }
         
         .redirect-message {
-            font-size: 14px;
-            opacity: 0.7;
+            font-size: 0.875rem;
+            color: #a3a6aa;
             margin-top: 20px;
+            text-align: center;
         }
         
         a {
-            color: #4CAF50;
+            color: #00aff4;
             text-decoration: none;
-            font-weight: bold;
         }
         
         a:hover {
             text-decoration: underline;
         }
         
-        .loading-bar {
+        .loading-bar-container {
             width: 100%;
-            height: 4px;
-            background-color: #333;
-            border-radius: 2px;
-            margin-top: 15px;
+            height: 3px;
+            background-color: #202225;
+            border-radius: 3px;
+            margin-top: 12px;
             overflow: hidden;
         }
         
-        .loading-progress {
+        .loading-bar {
             height: 100%;
             width: 0;
-            background-color: #4CAF50;
+            background-color: #3ba55c;
             animation: load 3s linear forwards;
         }
         
@@ -89,25 +122,50 @@
     </style>
 </head>
 <body>
-    <div class="embed-container">
-        <img src="https://cdn.discordapp.com/attachments/1358546260184793260/1371916976435499050/Sem_titulo.png?ex=6824e0c0&is=68238f40&hm=6b18b321a2c264668ae1bdba3d47b2f2354411d48d51a79e8b3bd36d2c6e4524&" alt="AzurFlowWare Logo" class="logo">
-        <div class="title">AzurFlowWare</div>
-        <div class="description">Site oficial do AzurFlowWare</div>
-        <div class="loading-bar">
-            <div class="loading-progress"></div>
+    <div class="discord-message">
+        <img src="https://cdn.discordapp.com/attachments/1358546260184793260/1371916976435499050/Sem_titulo.png?ex=6824e0c0&is=68238f40&hm=6b18b321a2c264668ae1bdba3d47b2f2354411d48d51a79e8b3bd36d2c6e4524&" 
+             alt="Avatar" class="avatar">
+        
+        <div class="message-content">
+            <div class="message-header">
+                <span class="username">AzurFlowWare</span>
+                <span class="timestamp">Hoje às <span id="time"></span></span>
+            </div>
+            
+            <div class="discord-embed">
+                <div class="embed-header">
+                    <img src="https://cdn.discordapp.com/attachments/1358546260184793260/1371916976435499050/Sem_titulo.png?ex=6824e0c0&is=68238f40&hm=6b18b321a2c264668ae1bdba3d47b2f2354411d48d51a79e8b3bd36d2c6e4524&" 
+                         alt="Embed Icon" class="embed-icon">
+                    <div class="embed-title">Site Oficial AzurFlowWare</div>
+                </div>
+                
+                <div class="embed-description">
+                    Clique no link abaixo para acessar o site oficial ou aguarde o redirecionamento automático.
+                </div>
+                
+                <div class="loading-bar-container">
+                    <div class="loading-bar"></div>
+                </div>
+            </div>
         </div>
     </div>
     
     <div class="redirect-message">
-        Redirecionando em 3 segundos... <br>
-        Se você não foi redirecionado automaticamente, <a href="https://sites.google.com/view/azurflowware/home">clique aqui</a>.
+        Você será redirecionado em 3 segundos... <br>
+        Se não for redirecionado, <a href="https://sites.google.com/view/azurflowware/home">clique aqui</a>.
     </div>
 
     <script>
-        // Redirecionamento via JavaScript para garantir funcionamento
+        // Mostra a hora atual no estilo Discord
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        document.getElementById('time').textContent = `${hours}:${minutes}`;
+        
+        // Redirecionamento via JavaScript
         setTimeout(function() {
             window.location.href = "https://sites.google.com/view/azurflowware/home";
-        }, 3000);
+        }, 1000);
     </script>
 </body>
 </html>
