@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AzurFlowWare Obfuscator</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Ferramenta avançada de ofuscação de código Lua para Roblox">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://cdn.discordapp.com/attachments/1358546260184793260/1371916976435499050/Sem_titulo.png?ex=6824e0c0&is=68238f40&hm=6b18b321a2c264668ae1bdba3d47b2f2354411d48d51a79e8b3bd36d2c6e4524&" 
+           alt="AzurFlowWare Logo" class="logo glow">
+      <h1 class="glow">AzurFlowWare Obfuscator</h1>
+    </div>
+    
+    <p>Cole seu código Lua abaixo e clique em <strong>Obfuscar</strong>:</p>
+    
+    <textarea id="inputCode" placeholder="print('Olá, Roblox!')"></textarea>
+    
+    <button class="btn" onclick="obfuscate()">
+      <i class="fas fa-lock"></i> Obfuscar
+    </button>
+    
+    <h2 style="margin-top: 1.5rem;">Código Obfuscado:</h2>
+    
+    <pre id="outputCode"></pre>
+    
+    <div>
+      <button class="btn" id="copyBtn" disabled>
+        <i class="far fa-copy"></i> Copiar
+      </button>
+      <button class="btn" id="downloadBtn" disabled>
+        <i class="fas fa-download"></i> Download
+      </button>
+    </div>
+    
+    <div class="footer">
+      Desenvolvido por <a href="https://sites.google.com/view/azurflowware/lua-obfuscator-beta" target="_blank">AzurFlowWare</a>
+      <br>
+      <small>Versão 1.0.0</small>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
