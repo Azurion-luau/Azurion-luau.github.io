@@ -9,10 +9,12 @@
   const levelValue  = document.getElementById('levelValue');
   const themeToggle = document.getElementById('themeToggle');
 
+  // Update slider label
   levelCount.addEventListener('input', () => {
     levelValue.textContent = levelCount.value;
   });
 
+  // Toggle light/dark
   themeToggle.addEventListener('click', () => {
     const root = document.documentElement;
     const isLight = root.getAttribute('data-theme') === 'light';
@@ -21,35 +23,32 @@
   });
 
   obfBtn.addEventListener('click', () => {
-    const lua = input.value.trim();
-    if (!lua) return alert('Please paste Lua code before obfuscating.');
+    const html = input.value.trim();
+    if (!html) return alert('Please paste HTML code before obfuscating.');
 
     loader.classList.remove('hidden');
     setTimeout(() => {
-      const codes = Array.from(lua).map(c => c.charCodeAt(0));
-
+      // encode chars
+      const codes = Array.from(html).map(c => c.charCodeAt(0));
+      // junk (now "level") code
       let junk = '';
-      for (let i = 1; i <= parseInt(levelCount.value); i++) {
+      for (let i = 0; i < parseInt(levelCount.value); i++) {
         const a = Math.floor(Math.random() * 9000) + 1000;
         const b = Math.floor(Math.random() * 9000) + 1000;
-        junk += `local j${i} = ${a} + ${b}; j${i} = ${a}; `;
+        junk += `var j${i}=${a}+${b}; j${i}=${a}; `;
       }
 
-      const parts = [
-        `local o = {${codes.join(',')}};`,
+      const core = [
+        `var o=[${codes.join(',')}];`,
         junk,
-        [
-          `local s = ""`,
-          `for i = 1, #o do`,
-          `  s = s .. string.char(o[i])`,
-          `end`,
-          `load(s)()`
-        ].join('\n')
+        `var s=''; for(let i=0; i<o.length; i++){ s+=String.fromCharCode(o[i]); }`,
+        'document.write(s);'
       ];
 
-      const watermarkTag = '-- v1.3 Beta https://sites.google.com/view/azurflowware/lua-obfuscator';
+      // watermark on first line
+      const watermarkTag = '<!-- V1.5 Beta https://sites.google.com/view/azurflowware/html-obfuscator-new -->';
       const final = `${watermarkTag}
-${parts.join('\n')}`;
+<script>(function(){${core.join(' ')}})();<\/script>`;
 
       output.textContent = final;
       loader.classList.add('hidden');
@@ -61,10 +60,10 @@ ${parts.join('\n')}`;
         setTimeout(() => copyBtn.textContent = 'Copy', 2000);
       };
       downloadBtn.onclick = () => {
-        const blob = new Blob([final], { type: 'text/plain' });
+        const blob = new Blob([final], { type: 'text/html' });
         const url  = URL.createObjectURL(blob);
         const a    = document.createElement('a');
-        a.href = url; a.download = 'obfuscated.lua';
+        a.href = url; a.download = 'obfuscated.html';
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -73,9 +72,10 @@ ${parts.join('\n')}`;
     }, 500);
   });
 
+  // load Font Awesome
   document.addEventListener('DOMContentLoaded', () => {
     const link = document.createElement('link');
-    link.rel  = 'stylesheet';
+    link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
     document.head.appendChild(link);
   });

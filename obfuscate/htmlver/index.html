@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AzurFlowWare Lua Obfuscator v1.3 Beta</title>
+  <title>AzurFlowWare HTML Obfuscator v1.5 Beta</title>
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Obfuscate your Lua scripts with junk code and automatic watermark">
+  <meta name="description" content="Advanced HTML code obfuscation tool — v1.5 Beta">
 </head>
 <body data-theme="dark">
   <div class="container">
     <header class="header">
       <img src="logo.png" alt="AzurFlowWare" class="logo glow">
-      <h1 class="title glow">Lua Obfuscator <span class="version">v1.3 Beta</span></h1>
+      <h1 class="title glow">HTML Obfuscator <span class="version">v1.5 Beta</span></h1>
       <button id="themeToggle" class="btn theme-btn">Light Mode</button>
     </header>
 
     <section class="controls">
-      <label for="inputCode">Paste your Lua code:</label>
-      <textarea id="inputCode" placeholder="print('Hello, world!')"></textarea>
+      <label for="inputCode">Paste your HTML code:</label>
+      <textarea id="inputCode" placeholder="<div>Hello, world!</div>"></textarea>
 
       <div class="options">
         <label for="levelCount">Obfuscation Level: <span id="levelValue">20</span></label>
-        <input type="range" id="levelCount" min="1" max="150" value="20">
+        <input type="range" id="levelCount" min="5" max="100" value="20">
       </div>
 
       <button class="btn obf-btn" id="obfBtn">
@@ -30,7 +30,7 @@
     </section>
 
     <section class="output">
-      <h2>Obfuscated Lua Script</h2>
+      <h2>Obfuscated Code</h2>
       <div class="loader hidden" id="loader"></div>
       <pre id="outputCode"></pre>
       <div class="actions">
@@ -40,7 +40,7 @@
     </section>
 
     <footer class="footer">
-      Developed by <a href="#" target="_blank">AzurFlowWare</a> • <small>v1.3 Beta</small>
+      Developed by <a href="#" target="_blank">AzurFlowWare</a> • <small>v1.5 Beta</small>
     </footer>
   </div>
 
