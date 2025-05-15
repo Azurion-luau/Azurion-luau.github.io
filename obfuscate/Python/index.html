@@ -4,8 +4,163 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AzurFlowWare Python Obfuscator v1.0 Beta</title>
-  <link rel="stylesheet" href="style.css">
   <meta name="description" content="Obfuscate your Python scripts with junk code and automatic watermark">
+  <!-- Inline CSS -->
+  <style>
+    :root {
+      --bg: #121212;
+      --fg: #eee;
+      --primary: #7f5af0;
+      --secondary: #2a2a2a;
+      --accent: #ff79c6;
+      --radius: 8px;
+      --trans: 0.3s;
+    }
+    body[data-theme="light"] {
+      --bg: #fafafa;
+      --fg: #222;
+      --secondary: #e0e0e0;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: var(--trans);
+    }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: var(--secondary);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 800px;
+      padding: 30px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .logo {
+      width: 48px;
+      height: 48px;
+    }
+    .glow {
+      text-shadow: 0 0 6px var(--primary);
+    }
+    .title {
+      font-size: 1.8rem;
+    }
+    .version {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    label, h2 {
+      display: block;
+      margin-bottom: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      background: var(--bg);
+      color: var(--fg);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      font-family: Consolas, Monaco, monospace;
+    }
+    .options {
+      margin: 15px 0;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .theme-btn {
+      background: transparent;
+      border: 1px solid var(--accent);
+    }
+    .btn i {
+      margin-right: 6px;
+    }
+    pre {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: var(--radius);
+      max-height: 400px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .loader {
+      width: 30px;
+      height: 30px;
+      border: 4px solid var(--secondary);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+    .loader.hidden {
+      display: none;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .footer small {
+      display: block;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+  </style>
+
+  <!-- FontAwesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHq6fRazpY3u2xjOq7VtAmljHkTfC2eVw5vFIBUlZ9E+IURyDvoM3bZfWxmk4zRW5xkXogig=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 <body data-theme="dark">
   <div class="container">
@@ -34,8 +189,12 @@
       <div class="loader hidden" id="loader"></div>
       <pre id="outputCode"></pre>
       <div class="actions">
-        <button class="btn" id="copyBtn" disabled><i class="far fa-copy"></i> Copy</button>
-        <button class="btn" id="downloadBtn" disabled><i class="fas fa-download"></i> Download</button>
+        <button class="btn" id="copyBtn" disabled>
+          <i class="far fa-copy"></i> <span id="copyText">Copy</span>
+        </button>
+        <button class="btn" id="downloadBtn" disabled>
+          <i class="fas fa-download"></i> Download
+        </button>
       </div>
     </section>
 
@@ -44,8 +203,89 @@
     </footer>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>ipt>
+  <!-- Inline JS -->
+  <script>
+    (function() {
+      const input       = document.getElementById('inputCode');
+      const obfBtn      = document.getElementById('obfBtn');
+      const output      = document.getElementById('outputCode');
+      const copyBtn     = document.getElementById('copyBtn');
+      const copyText    = document.getElementById('copyText');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const loader      = document.getElementById('loader');
+      const levelCount  = document.getElementById('levelCount');
+      const levelValue  = document.getElementById('levelValue');
+      const themeToggle = document.getElementById('themeToggle');
+
+      // Sync slider label
+      levelCount.addEventListener('input', () => {
+        levelValue.textContent = levelCount.value;
+      });
+
+      // Theme toggle
+      themeToggle.addEventListener('click', () => {
+        const root = document.documentElement;
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        themeToggle.textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+      });
+
+      // Obfuscate action
+      obfBtn.addEventListener('click', () => {
+        const code = input.value.trim();
+        if (!code) return alert('Please paste Python code before obfuscating.');
+
+        loader.classList.remove('hidden');
+        setTimeout(() => {
+          // Convert code to character codes
+          const codes = Array.from(code).map(ch => ch.charCodeAt(0));
+
+          // Generate junk
+          let junk = '';
+          for (let i = 1; i <= parseInt(levelCount.value, 10); i++) {
+            const a = Math.floor(Math.random() * 9000) + 1000;
+            const b = Math.floor(Math.random() * 9000) + 1000;
+            junk += `j${i} = ${a} + ${b}\n`;
+            junk += `j${i} = ${a}\n`;
+          }
+
+          // Assemble final script
+          const parts = [
+            `o = [${codes.join(',')}]`,
+            junk,
+            `s = "".join(chr(c) for c in o)`,
+            `exec(s)`
+          ];
+          const watermark = '# v1.0 Beta – https://sites.google.com/view/azurflowware/python-obfuscator';
+          const final = [watermark, ...parts].join('\n\n');
+
+          output.textContent = final;
+          loader.classList.add('hidden');
+          copyBtn.disabled = downloadBtn.disabled = false;
+
+          // Copy handler
+          copyBtn.onclick = () => {
+            navigator.clipboard.writeText(final).then(() => {
+              copyText.textContent = 'Copied!';
+              setTimeout(() => { copyText.textContent = 'Copy'; }, 2000);
+            });
+          };
+
+          // Download handler
+          downloadBtn.onclick = () => {
+            const blob = new Blob([final], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'obfuscated.py';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          };
+        }, 300);
+      });
+    })();
+  </script>
 </body>
 </html>
