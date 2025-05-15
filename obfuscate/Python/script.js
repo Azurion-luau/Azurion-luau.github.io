@@ -10,6 +10,18 @@
   const levelValue  = document.getElementById('levelValue');
   const themeToggle = document.getElementById('themeToggle');
 
+  // Initialize slider label and button states
+  document.addEventListener('DOMContentLoaded', () => {
+    levelValue.textContent = levelCount.value;
+    copyBtn.disabled = downloadBtn.disabled = true;
+
+    // Load FontAwesome icons
+    const link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+    document.head.appendChild(link);
+  });
+
   // Sync slider label
   levelCount.addEventListener('input', () => {
     levelValue.textContent = levelCount.value;
@@ -35,7 +47,8 @@
 
       // Generate junk assignments
       let junk = '';
-      for (let i = 1; i <= parseInt(levelCount.value); i++) {
+      const level = parseInt(levelCount.value, 10);
+      for (let i = 1; i <= level; i++) {
         const a = Math.floor(Math.random() * 9000) + 1000;
         const b = Math.floor(Math.random() * 9000) + 1000;
         junk += `j${i} = ${a} + ${b}\n`;
@@ -44,13 +57,13 @@
 
       // Build final script
       const parts = [
-        `o = [${codes.join(',')} ]`,
+        `o = [${codes.join(',')}]`,
         junk,
         `s = ''.join(chr(c) for c in o)`,
         `exec(s)`
       ];
 
-      const watermark = '# v1.0 Beta – https://sites.google.com/view/azurflowware/python-obfuscator';
+      const watermark = '# v1.0 Beta - https://sites.google.com/view/azurflowware/python-obfuscator';
       const final = [watermark, ...parts].join('\n\n');
 
       output.textContent = final;
@@ -61,14 +74,14 @@
       copyBtn.onclick = () => {
         navigator.clipboard.writeText(final);
         copyBtn.textContent = 'Copied!';
-        setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
       };
 
       // Download as file
       downloadBtn.onclick = () => {
         const blob = new Blob([final], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement('a');
         a.href = url;
         a.download = 'obfuscated.py';
         document.body.appendChild(a);
@@ -77,13 +90,5 @@
         URL.revokeObjectURL(url);
       };
     }, 300);
-  });
-
-  // Load FontAwesome icons
-  document.addEventListener('DOMContentLoaded', () => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
-    document.head.appendChild(link);
   });
 })();
