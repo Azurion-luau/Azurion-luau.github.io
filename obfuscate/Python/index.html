@@ -1,0 +1,50 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AzurFlowWare Python Obfuscator v1.0 Beta</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Obfuscate your Python scripts with junk code and automatic watermark">
+</head>
+<body data-theme="dark">
+  <div class="container">
+    <header class="header">
+      <img src="logo.png" alt="AzurFlowWare" class="logo glow">
+      <h1 class="title glow">Python Obfuscator <span class="version">v1.0 Beta</span></h1>
+      <button id="themeToggle" class="btn theme-btn">Light Mode</button>
+    </header>
+
+    <section class="controls">
+      <label for="inputCode">Paste your Python code:</label>
+      <textarea id="inputCode" placeholder="print('Hello, world!')"></textarea>
+
+      <div class="options">
+        <label for="levelCount">Obfuscation Level: <span id="levelValue">20</span></label>
+        <input type="range" id="levelCount" min="1" max="150" value="20">
+      </div>
+
+      <button class="btn obf-btn" id="obfBtn">
+        <i class="fas fa-lock"></i> Obfuscate
+      </button>
+    </section>
+
+    <section class="output">
+      <h2>Obfuscated Python Script</h2>
+      <div class="loader hidden" id="loader"></div>
+      <pre id="outputCode"></pre>
+      <div class="actions">
+        <button class="btn" id="copyBtn" disabled><i class="far fa-copy"></i> Copy</button>
+        <button class="btn" id="downloadBtn" disabled><i class="fas fa-download"></i> Download</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Developed by <a href="#" target="_blank">AzurFlowWare</a> • <small>v1.0 Beta</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
