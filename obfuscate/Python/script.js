@@ -18,21 +18,22 @@
   // Light / dark toggle
   themeToggle.addEventListener('click', () => {
     const root = document.documentElement;
-    const isLight = root.getAttribute('data-theme') === 'light';
-    root.setAttribute('data-theme', isLight ? 'dark' : 'light');
-    themeToggle.textContent = isLight ? 'Light Mode' : 'Dark Mode';
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    themeToggle.textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
   });
 
   obfBtn.addEventListener('click', () => {
-    const py = input.value.trim();
-    if (!py) return alert('Please paste Python code before obfuscating.');
+    const code = input.value.trim();
+    if (!code) return alert('Please paste Python code before obfuscating.');
 
     loader.classList.remove('hidden');
     setTimeout(() => {
-      // Convert each character to its code
-      const codes = Array.from(py).map(c => c.charCodeAt(0));
+      // Convert each character to its Unicode code point
+      const codes = Array.from(code).map(ch => ch.charCodeAt(0));
 
-      // Junk variables
+      // Generate junk assignments
       let junk = '';
       for (let i = 1; i <= parseInt(levelCount.value); i++) {
         const a = Math.floor(Math.random() * 9000) + 1000;
@@ -41,44 +42,48 @@
         junk += `j${i} = ${a}\n`;
       }
 
-      // Rebuild and exec
+      // Build final script
       const parts = [
-        `o = [${codes.join(',')}]`,
+        `o = [${codes.join(',')} ]`,
         junk,
-        [
-          `s = "".join(chr(c) for c in o)`,
-          `exec(s)`
-        ].join('\n')
+        `s = ''.join(chr(c) for c in o)`,
+        `exec(s)`
       ];
 
-      const watermark = '# v1.0 Beta  https://sites.google.com/view/azurflowware/python-obfuscator';
+      const watermark = '# v1.0 Beta – https://sites.google.com/view/azurflowware/python-obfuscator';
       const final = [watermark, ...parts].join('\n\n');
 
       output.textContent = final;
       loader.classList.add('hidden');
       copyBtn.disabled = downloadBtn.disabled = false;
 
+      // Copy to clipboard
       copyBtn.onclick = () => {
         navigator.clipboard.writeText(final);
         copyBtn.textContent = 'Copied!';
         setTimeout(() => copyBtn.textContent = 'Copy', 2000);
       };
+
+      // Download as file
       downloadBtn.onclick = () => {
         const blob = new Blob([final], { type: 'text/plain' });
-        const url  = URL.createObjectURL(blob);
-        const a    = document.createElement('a');
-        a.href = url; a.download = 'obfuscated.py';
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'obfuscated.py';
         document.body.appendChild(a);
-        a.click(); a.remove();
+        a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
       };
-    }, 500);
+    }, 300);
   });
 
-  // Load FontAwesome
+  // Load FontAwesome icons
   document.addEventListener('DOMContentLoaded', () => {
     const link = document.createElement('link');
-    link.rel  = 'stylesheet';
+    link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
     document.head.appendChild(link);
   });
+})();
