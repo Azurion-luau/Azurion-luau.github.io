@@ -1,49 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AzurFlowWare Lua Obfuscator v1.3 Beta</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Obfuscate your Lua scripts with junk code and automatic watermark">
+  <meta charset="UTF-8" />
+  <title>Login Discord</title>
 </head>
-<body data-theme="dark">
-  <div class="container">
-    <header class="header">
-      <img src="logo.png" alt="AzurFlowWare" class="logo glow">
-      <h1 class="title glow">Lua Obfuscator <span class="version">v1.3 Beta</span></h1>
-      <button id="themeToggle" class="btn theme-btn">Light Mode</button>
-    </header>
+<body>
+  <h1>Login com Discord</h1>
+  <button id="loginBtn">Entrar com Discord</button>
 
-    <section class="controls">
-      <label for="inputCode">Paste your Lua code:</label>
-      <textarea id="inputCode" placeholder="print('Hello, world!')"></textarea>
+  <script>
+    const clientId = '1352310875519979654';
+    const redirectUri = encodeURIComponent('https://azurion-luau.github.io/obfuscate/');
+    const scope = encodeURIComponent('identify');
+    const discordInvite = 'https://discord.gg/Mtj6qkvaw8';
 
-      <div class="options">
-        <label for="levelCount">Obfuscation Level: <span id="levelValue">20</span></label>
-        <input type="range" id="levelCount" min="1" max="150" value="20">
-      </div>
+    const loginBtn = document.getElementById('loginBtn');
 
-      <button class="btn obf-btn" id="obfBtn">
-        <i class="fas fa-lock"></i> Obfuscate
-      </button>
-    </section>
+    loginBtn.onclick = () => {
+      const url = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}&prompt=consent`;
+      window.location.href = url;
+    };
 
-    <section class="output">
-      <h2>Obfuscated Lua Script</h2>
-      <div class="loader hidden" id="loader"></div>
-      <pre id="outputCode"></pre>
-      <div class="actions">
-        <button class="btn" id="copyBtn" disabled><i class="far fa-copy"></i> Copy</button>
-        <button class="btn" id="downloadBtn" disabled><i class="fas fa-download"></i> Download</button>
-      </div>
-    </section>
+    // Ao carregar a página, checa se tem token no hash da URL
+    window.onload = () => {
+      if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        const accessToken = params.get('access_token');
 
-    <footer class="footer">
-      Developed by <a href="#" target="_blank">AzurFlowWare</a> • <small>v1.3 Beta</small>
-    </footer>
-  </div>
+        if (accessToken) {
+          console.log('Token do Discord:', accessToken);
 
-  <script src="script.js"></script>
+          // Você pode chamar a API do Discord aqui para pegar o usuário, exemplo:
+          fetch('https://discord.com/api/users/@me', {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          })
+          .then(res => res.json())
+          .then(user => {
+            alert(`Olá, ${user.username}#${user.discriminator}! Redirecionando para o Discord...`);
+            // Depois redireciona para o convite
+            window.location.href = discordInvite;
+          })
+          .catch(err => {
+            alert('Erro ao buscar dados do usuário.');
+            console.error(err);
+          });
+        }
+      }
+    };
+  </script>
 </body>
 </html>
